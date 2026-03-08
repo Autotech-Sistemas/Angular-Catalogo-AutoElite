@@ -1,0 +1,100 @@
+﻿<section id="loan-sim" class="loan-sim-section" aria-label="Simulador de financiamento">
+  <div class="loan-sim-wrap" data-aos="fade-up">
+    <header class="loan-sim-head">
+      <h2>Simule seu <span class="title-accent">financiamento</span></h2>
+      <p>Informe valores reais da sua compra para prever parcela, juros e impacto na renda.</p>
+    </header>
+
+    <div class="loan-sim-grid">
+      <form class="loan-form" (submit)="$event.preventDefault()" aria-label="Formulario de simulacao">
+        <label>
+          Categoria do veiculo
+          <select [(ngModel)]="vehicleCategory" name="vehicleCategory">
+            <option>Sedan</option>
+            <option>SUV</option>
+            <option>Hatch</option>
+            <option>Picape</option>
+            <option>Premium</option>
+          </select>
+        </label>
+
+        <label>
+          Valor do veiculo
+          <div class="field-inline">
+            <input type="number" min="20000" step="1000" [(ngModel)]="vehiclePrice" name="vehiclePrice" />
+            <select [(ngModel)]="currency" name="currency" aria-label="Moeda">
+              <option value="BRL">BRL</option>
+              <option value="USD">USD</option>
+              <option value="EUR">EUR</option>
+            </select>
+          </div>
+        </label>
+
+        <label>
+          Valor de entrada
+          <input type="number" min="0" step="500" [(ngModel)]="downPayment" name="downPayment" />
+        </label>
+
+        <div class="inline-summary">
+          <span>Valor financiado</span>
+          <strong>{{ formatMoney(financedAmount) }}</strong>
+        </div>
+
+        <label>
+          Prazo em meses
+          <div class="field-inline single">
+            <input type="number" min="12" max="96" step="6" [(ngModel)]="loanMonths" name="loanMonths" />
+            <small>({{ (loanMonths / 12).toFixed(1) }} anos)</small>
+          </div>
+        </label>
+
+        <label>
+          Taxa de juros ao ano
+          <input type="number" min="0" step="0.1" [(ngModel)]="annualRate" name="annualRate" />
+        </label>
+
+        <label>
+          Renda mensal aproximada
+          <input type="number" min="1500" step="500" [(ngModel)]="monthlyIncome" name="monthlyIncome" />
+        </label>
+
+        <label>
+          Faixa de score
+          <select [(ngModel)]="creditRange" name="creditRange" aria-label="Faixa de score de credito">
+            <option>Excellent (750+)</option>
+            <option>Good (700-749)</option>
+            <option>Fair (650-699)</option>
+            <option>Poor (below 650)</option>
+          </select>
+        </label>
+
+        <button class="loan-calc-btn" type="button">Recalcular simulacao</button>
+      </form>
+
+      <aside class="loan-result" aria-live="polite">
+        <h3>Parcela mensal estimada</h3>
+        <p class="monthly">{{ formatMoney(monthlyPayment) }}</p>
+
+        <div class="result-list">
+          <div><span>Categoria</span><strong>{{ vehicleCategory }}</strong></div>
+          <div><span>Valor Financiado</span><strong>{{ formatMoney(financedAmount) }}</strong></div>
+          <div><span>Total de Juros</span><strong>{{ formatMoney(totalInterests) }}</strong></div>
+          <div><span>Comprometimento da renda</span><strong>{{ commitmentPercent | number: '1.1-1' }}%</strong></div>
+          <div><span>Renda recomendada (30%)</span><strong>{{ formatMoney(recommendedIncome) }}</strong></div>
+          <div><span>Previsao de Quitacao</span><strong>{{ payoffDate }}</strong></div>
+        </div>
+
+        <div class="save-note">
+          <span>
+            Com entrada maior ou prazo menor voce reduz juros. Ajuste os campos para comparar cenarios.
+          </span>
+        </div>
+
+        <a href="#test-drive" (click)="scrollToSection($event, 'test-drive')" class="apply-btn">
+          Quero proposta personalizada
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+        </a>
+      </aside>
+    </div>
+  </div>
+</section>

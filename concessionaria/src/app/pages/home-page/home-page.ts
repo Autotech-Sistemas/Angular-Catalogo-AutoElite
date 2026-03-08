@@ -1,20 +1,18 @@
-import { Component, AfterViewInit, OnDestroy, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { Component, AfterViewInit, OnDestroy, OnInit, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import * as AOS from 'aos';
+import { Meta, Title } from '@angular/platform-browser';
 
-import { Header } from '../../shared/components/header/header';
 import { Hero } from '../../shared/components/hero/hero';
 import { Showroom3d } from '../../shared/components/showroom3d/showroom3d';
-import { Features } from '../../shared/components/features/features';
 import { Categories } from '../../shared/components/categories/categories';
-import { Gallery } from '../../shared/components/gallery/gallery';
 import { Services } from '../../shared/components/services/services';
+import { Faq } from '../../shared/components/faq/faq';
 import { Financing } from '../../shared/components/financing/financing';
+import { LoanSimulator } from '../../shared/components/loan-simulator/loan-simulator';
 import { Testimonials } from '../../shared/components/testimonials/testimonials';
 import { Contact } from '../../shared/components/contact/contact';
 import { Map } from '../../shared/components/map/map';
-import { Footer } from '../../shared/components/footer/footer';
-import { WhatsappButton } from '../../shared/components/whatsapp-button/whatsapp-button';
 
 declare var lucide: any;
 
@@ -25,24 +23,45 @@ declare var lucide: any;
     CommonModule,
     Hero,
     Showroom3d,
-    Features,
     Categories,
-    Gallery,
     Services,
+    Faq,
     Financing,
+    LoanSimulator,
     Testimonials,
     Contact,
-    Map
-],
+    Map,
+  ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: './home-page.html',
   styleUrl: './home-page.css',
 })
-export class HomePage implements AfterViewInit, OnDestroy {
+export class HomePage implements OnInit, AfterViewInit, OnDestroy {
   isScrolled = false;
   private scrollListener: any;
 
-  constructor() {}
+  constructor(
+    private title: Title,
+    private meta: Meta,
+  ) {}
+
+  ngOnInit(): void {
+    this.title.setTitle('AutoElite | Concessionaria com Estoque 3D e Financiamento');
+    this.meta.updateTag({
+      name: 'description',
+      content:
+        'AutoElite: estoque com visualizacao 3D, simulador de financiamento, depoimentos e atendimento especializado para compra, troca e venda.',
+    });
+    this.meta.updateTag({
+      property: 'og:title',
+      content: 'AutoElite | Estoque 3D e Financiamento Automotivo',
+    });
+    this.meta.updateTag({
+      property: 'og:description',
+      content:
+        'Veja veiculos em 3D, simule financiamento e fale com especialistas para fechar seu proximo carro.',
+    });
+  }
 
   ngAfterViewInit() {
     if (typeof window !== 'undefined') {

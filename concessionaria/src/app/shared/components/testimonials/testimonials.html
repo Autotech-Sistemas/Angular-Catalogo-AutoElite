@@ -1,68 +1,64 @@
-<section class="py-20 bg-primary">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <h2 class="text-center text-3xl font-black text-dark mb-16 tracking-tight">
-      O que dizem nossos <span class="text-accent">clientes</span>
-    </h2>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-      <div class="bg-white p-8 rounded-3xl shadow-soft">
-        <div class="flex text-yellow-400 mb-6 gap-1">
-          <i data-lucide="star" class="w-5 h-5 fill-current"></i>
-          <i data-lucide="star" class="w-5 h-5 fill-current"></i>
-          <i data-lucide="star" class="w-5 h-5 fill-current"></i>
-          <i data-lucide="star" class="w-5 h-5 fill-current"></i>
-          <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+﻿<section class="stories-section" aria-label="Depoimentos de clientes">
+  <div class="stories-wrap">
+    <header class="stories-header" data-aos="fade-up">
+      <h2>Historias reais, experiencias <span class="title-accent">reais</span></h2>
+      <p>Veja como ajudamos clientes a comprar, trocar e financiar com confianca.</p>
+    </header>
+
+    <div class="stories-layout" data-aos="fade-up" data-aos-delay="100">
+      <article class="stories-copy">
+        <div class="quote-shell">
+          <svg class="quote-icon quote-open" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M10 13H6a4 4 0 0 1 4-4V5a8 8 0 0 0-8 8v6h8z"></path>
+            <path d="M22 13h-4a4 4 0 0 1 4-4V5a8 8 0 0 0-8 8v6h8z"></path>
+          </svg>
+          <p class="stories-quote">{{ current.quote }}</p>
+          <svg class="quote-icon quote-close" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M10 13H6a4 4 0 0 1 4-4V5a8 8 0 0 0-8 8v6h8z"></path>
+            <path d="M22 13h-4a4 4 0 0 1 4-4V5a8 8 0 0 0-8 8v6h8z"></path>
+          </svg>
         </div>
-        <p class="text-gray-600 italic mb-8">
-          "Comprei meu primeiro carro com eles. Me ajudaram na aprovação do crédito mesmo com score
-          baixo."
-        </p>
-        <div class="flex items-center gap-4 border-t border-gray-100 pt-6">
-          <img
-            src="https://randomuser.me/api/portraits/men/32.jpg"
-            class="w-12 h-12 rounded-full border-2 border-accent"
-            alt="Cliente"
-          />
+
+        <div class="stories-meta">
           <div>
-            <p class="text-dark font-bold">Marcos Silva</p>
-            <p class="text-textGray text-xs font-bold uppercase">Comprou HB20</p>
+            <h3>{{ current.name }}</h3>
+            <p>{{ current.role }}</p>
+          </div>
+          <div class="stories-location">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 22s8-7.2 8-13a8 8 0 1 0-16 0c0 5.8 8 13 8 13Z"></path>
+              <circle cx="12" cy="9" r="2.5"></circle>
+            </svg>
+            <span>{{ current.location }}</span>
           </div>
         </div>
-      </div>
-      <div class="bg-white p-8 rounded-3xl shadow-soft">
-        <div class="flex text-yellow-400 mb-6 gap-1">
-          <i data-lucide="star" class="w-5 h-5 fill-current"></i>
-          <i data-lucide="star" class="w-5 h-5 fill-current"></i>
-          <i data-lucide="star" class="w-5 h-5 fill-current"></i>
-          <i data-lucide="star" class="w-5 h-5 fill-current"></i>
-          <i data-lucide="star" class="w-5 h-5 fill-current"></i>
-        </div>
-        <p class="text-gray-600 italic mb-8">
-          "Atendimento nota 10. O vendedor foi super atencioso e o carro estava impecável."
-        </p>
-        <div class="flex items-center gap-4 border-t border-gray-100 pt-6">
-          <img
-            src="https://randomuser.me/api/portraits/women/44.jpg"
-            class="w-12 h-12 rounded-full border-2 border-accent"
-            alt="Cliente"
-          />
-          <div>
-            <p class="text-dark font-bold">Fernanda Lima</p>
-            <p class="text-textGray text-xs font-bold uppercase">Comprou Honda Fit</p>
+
+        <div class="stories-controls">
+          <button type="button" class="ctrl main" (click)="prev()" aria-label="Anterior">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg>
+          </button>
+          <button type="button" class="ctrl" (click)="next()" aria-label="Proximo">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
+          </button>
+
+          <div class="dots">
+            <button
+              *ngFor="let item of testimonials; let i = index"
+              type="button"
+              [class.active]="i === activeIndex"
+              (click)="goTo(i)"
+              [attr.aria-label]="'Depoimento ' + (i + 1)"
+            ></button>
           </div>
         </div>
-      </div>
-      <div class="rounded-3xl overflow-hidden relative shadow-lg">
-        <img
-          src="outros/entrega-chave.avif"
-          class="w-full h-full object-cover"
-          alt="Entrega"
-        />
-        <div class="absolute inset-0 bg-gradient-to-t from-dark/80 to-transparent"></div>
-        <div class="absolute bottom-0 left-0 w-full p-8">
-          <span class="bg-green-500 text-white text-xs font-bold px-2 py-1 rounded">ENTREGA</span>
-          <p class="text-white font-bold text-xl mt-2">Família Satisfeita!</p>
-        </div>
-      </div>
+      </article>
+
+      <aside class="stories-media">
+        <img [src]="current.image" [alt]="current.name" />
+        <button type="button" class="play-btn" aria-label="Play depoimento">
+          <span></span>
+        </button>
+      </aside>
     </div>
   </div>
 </section>

@@ -1,17 +1,234 @@
-/* Ajuste fino para os ícones */
-i {
-  stroke-width: 2.5px;
+﻿.financing-section {
+  background: var(--theme-bg);
+  padding: 5.5rem 0;
+  overflow-x: hidden;
 }
 
-/* Efeito de brilho suave no fundo */
-@keyframes pulse-glow {
-  0%,
-  100% {
-    opacity: 0.3;
-    transform: translate(-50%, -50%) scale(1);
+.financing-container {
+  width: min(1380px, 96%);
+  margin: 0 auto;
+}
+
+.financing-header {
+  text-align: center;
+  max-width: 760px;
+  margin: 0 auto 3rem;
+}
+
+.financing-header h2 {
+  color: var(--theme-text);
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  line-height: 1.1;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+}
+
+.financing-header h2 span {
+  color: var(--theme-accent);
+}
+
+.financing-header p {
+  margin-top: 1.2rem;
+  color: var(--theme-muted);
+  font-size: 1.05rem;
+  line-height: 1.65;
+}
+
+.financing-tabs {
+  margin: 2rem auto 0;
+  padding: 0.3rem;
+  border-radius: 999px;
+  border: 1px solid var(--theme-border);
+  background: var(--theme-surface-alt);
+  display: inline-flex;
+  gap: 0.35rem;
+}
+
+.tab-btn {
+  border: none;
+  background: transparent;
+  color: var(--theme-text);
+  font-size: 0.98rem;
+  font-weight: 700;
+  border-radius: 999px;
+  padding: 0.65rem 1.4rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tab-btn:hover {
+  background: var(--theme-surface);
+}
+
+.tab-btn.is-active {
+  background: var(--theme-accent);
+  color: var(--theme-on-accent);
+  box-shadow: 0 10px 18px -12px rgba(193, 18, 31, 0.8);
+}
+
+.financing-content {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.4rem;
+  align-items: stretch;
+}
+
+.content-copy {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: clamp(1.1rem, 2.2vw, 1.8rem) 0;
+}
+
+.content-copy h3 {
+  color: var(--theme-text);
+  font-size: clamp(1.8rem, 3.2vw, 2.8rem);
+  line-height: 1.1;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+}
+
+.content-copy h3 span {
+  color: var(--theme-accent);
+}
+
+.content-copy > p {
+  margin-top: 1rem;
+  color: var(--theme-muted);
+  line-height: 1.7;
+  font-size: 1.02rem;
+}
+
+.content-copy ul {
+  margin-top: 1.35rem;
+  display: grid;
+  gap: 0.85rem;
+}
+
+.content-copy li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.55rem;
+  color: var(--theme-text);
+  line-height: 1.5;
+}
+
+.check-icon {
+  width: 1rem;
+  height: 1rem;
+  margin-top: 0.22rem;
+  color: var(--theme-accent);
+  flex: 0 0 auto;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+}
+
+.financing-cta {
+  margin-top: 1.5rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  border-radius: 999px;
+  background: var(--theme-accent);
+  color: var(--theme-on-accent);
+  padding: 0.78rem 1.3rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.financing-cta:hover {
+  background: var(--theme-accent-strong);
+}
+
+.cta-icon {
+  width: 0.95rem;
+  height: 0.95rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+}
+
+.content-gallery {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  min-width: 0;
+}
+
+.content-gallery figure {
+  margin: 0;
+  border-radius: 24px;
+  overflow: hidden;
+  border: 1px solid var(--theme-border);
+  background: var(--theme-surface-alt);
+}
+
+.content-gallery img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.gallery-main {
+  min-height: 300px;
+}
+
+.gallery-side {
+  min-height: 220px;
+}
+
+@media (min-width: 960px) {
+  .financing-content {
+    grid-template-columns: minmax(380px, 0.9fr) minmax(0, 1.1fr);
+    gap: 2rem;
+    align-items: stretch;
   }
-  50% {
-    opacity: 0.5;
-    transform: translate(-50%, -50%) scale(1.1);
+
+  .content-gallery {
+    --image-size: clamp(380px, 35vw, 580px);
+    grid-template-columns: var(--image-size) var(--image-size);
+    justify-content: end;
+    gap: 1rem;
+    height: 100%;
+    align-self: stretch;
+    margin-right: calc(50% - 50vw);
+    padding-right: 0;
+  }
+
+  .gallery-main {
+    width: var(--image-size);
+    height: 100%;
+    min-height: 100%;
+  }
+
+  .gallery-side {
+    width: var(--image-size);
+    height: 100%;
+    min-height: 100%;
+    margin-right: calc(var(--image-size) * -0.5);
+  }
+}
+
+@media (max-width: 640px) {
+  .financing-section {
+    padding: 4rem 0;
+  }
+
+  .financing-container {
+    width: 96%;
+  }
+
+  .financing-tabs {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .tab-btn {
+    padding: 0.65rem 0.2rem;
+    font-size: 0.86rem;
   }
 }

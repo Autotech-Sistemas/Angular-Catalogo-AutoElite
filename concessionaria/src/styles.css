@@ -6,23 +6,131 @@
 
 @import 'aos/dist/aos.css';
 
-/* --- CSS CRÍTICO PARA O 3D --- */
+:root {
+  --theme-bg: #eceff4;
+  --theme-surface: #f7f9fc;
+  --theme-surface-alt: #e9edf3;
+  --theme-text: #101521;
+  --theme-muted: #5a6475;
+  --theme-border: #ccd3de;
+  --theme-accent: #c1121f;
+  --theme-accent-strong: #a10f1a;
+  --theme-on-accent: #ffffff;
+  --theme-dark-surface: #06080d;
+}
+
+[data-theme='dark'] {
+  --theme-bg: #090d14;
+  --theme-surface: #111723;
+  --theme-surface-alt: #151e2b;
+  --theme-text: #edf0f6;
+  --theme-muted: #a0abba;
+  --theme-border: #2a3342;
+  --theme-accent: #ea3e4c;
+  --theme-accent-strong: #c1121f;
+  --theme-on-accent: #ffffff;
+  --theme-dark-surface: #05070b;
+}
+
+html,
+body {
+  overflow-x: hidden;
+}
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background: var(--theme-bg);
+  color: var(--theme-text);
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid var(--theme-accent);
+  outline-offset: 2px;
+}
+
+.skip-link {
+  position: absolute;
+  left: 0.8rem;
+  top: -40px;
+  z-index: 1000;
+  background: var(--theme-text);
+  color: #fff;
+  padding: 0.45rem 0.8rem;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+  top: 0.8rem;
+}
+
+.app-shell {
+  background: var(--theme-bg);
+  color: var(--theme-text);
+}
+
+.stock-section,
+.services-v2,
+.faq-section,
+.financing-section,
+.stories-section,
+.contact-v2,
+.location-v2,
+.footer-v2 {
+  background: var(--theme-bg);
+  color: var(--theme-text);
+}
+
+.stock-card,
+.services-v2-card,
+.faq-item,
+.faq-contact,
+.success-box {
+  background: var(--theme-surface);
+  border-color: var(--theme-border);
+}
+
+.financing-header h2 span,
+.content-copy h3 span,
+.services-v2-header h2 span,
+.faq-side h2 span {
+  color: var(--theme-accent);
+}
+
+.financing-cta,
+.submit-btn,
+.faq-talk,
+.vehicle-cta,
+.footer-v2-cta,
+.faq-cta {
+  background: var(--theme-accent);
+  color: var(--theme-on-accent);
+}
+
+[data-theme='dark'] .footer-v2-wrap {
+  background: var(--theme-dark-surface);
+}
+
+[data-theme='dark'] .footer-v2-links a,
+[data-theme='dark'] .footer-v2-bottom p,
+[data-theme='dark'] .footer-brand strong {
+  color: #e5e7eb;
+}
+
 model-viewer {
   width: 100%;
-  height: 100%; /* Ocupa 100% do container pai */
-  min-height: 500px; /* Altura mínima para mobile */
-
-  /* DICA: Para forçar retangular (Widescreen), você pode usar aspect-ratio se o container permitir */
-  /* aspect-ratio: 16 / 9; */
-
+  height: 100%;
+  min-height: 500px;
   background-color: transparent;
   --poster-color: transparent;
-
-  /* Evita que o outline de foco apareça ao clicar */
   outline: none;
 }
 
-/* Estilo do Menu (Efeito Vidro) */
 .glass-nav {
   background: rgba(255, 255, 255, 0.9);
   backdrop-filter: blur(12px);
@@ -30,16 +138,18 @@ model-viewer {
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 
-/* Texto com Gradiente (Opcional, caso use em títulos) */
 .text-gradient {
-  background: linear-gradient(to right, #2563eb, #1e40af);
+  background: linear-gradient(to right, #ea3e4c, #a10f1a);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   color: transparent;
 }
 
-/* Animação de Flutuação */
+.title-accent {
+  color: var(--theme-accent) !important;
+}
+
 @keyframes float {
   0% {
     transform: translateY(0px);
@@ -56,17 +166,15 @@ model-viewer {
   animation: float 4s ease-in-out infinite;
 }
 
-/* Esconder barra de rolagem (para a galeria horizontal) */
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
 
 .no-scrollbar {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
-/* Suavização de renderização para imagens em hover */
 .group:hover img {
   transform: scale(1.05);
   backface-visibility: hidden;

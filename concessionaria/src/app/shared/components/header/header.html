@@ -1,4 +1,4 @@
-<header
+﻿<header
   class="fixed w-full z-50 transition-all duration-300 border-b"
   [ngClass]="{
     'bg-white/95 backdrop-blur-md shadow-sm py-2 border-gray-100': isScrolled,
@@ -8,10 +8,7 @@
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between h-12">
       <!-- Logo -->
-      <div
-        class="flex-shrink-0 flex items-center gap-2 cursor-pointer"
-        (click)="scrollToTop($event)"
-      >
+      <a href="#highlight" class="flex-shrink-0 flex items-center gap-2 cursor-pointer" (click)="scrollToTop($event)" aria-label="Ir para o inicio">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="28"
@@ -36,14 +33,14 @@
         >
           AutoElite<span class="text-red-500">.</span>
         </span>
-      </div>
+      </a>
 
       <!-- Desktop Menu -->
-      <div class="hidden lg:block">
+      <nav class="hidden lg:block" aria-label="Navegacao principal">
         <div class="ml-10 flex items-center space-x-1">
           <a
             *ngFor="let item of menuItems"
-            href="#"
+            [attr.href]="'#' + item.id"
             (click)="scrollToSection($event, item.id)"
             class="px-4 py-2 text-sm font-bold rounded-full transition-all"
             [ngClass]="
@@ -67,11 +64,94 @@
           >
             Avaliar meu Carro
           </a>
+
+          <button
+            type="button"
+            (click)="toggleTheme()"
+            class="ml-2 w-10 h-10 rounded-full border flex items-center justify-center transition-all"
+            [ngClass]="
+              isScrolled
+                ? 'bg-white border-gray-300 text-gray-700 hover:text-amber-600'
+                : 'bg-white/10 border-white/30 text-white hover:bg-white/20'
+            "
+            aria-label="Alternar tema"
+          >
+            <svg
+              *ngIf="theme === 'light'"
+              xmlns="http://www.w3.org/2000/svg"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M12 3a6 6 0 1 0 9 9 9 9 0 1 1-9-9z" />
+            </svg>
+            <svg
+              *ngIf="theme === 'dark'"
+              xmlns="http://www.w3.org/2000/svg"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="12" cy="12" r="4" />
+              <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
+            </svg>
+          </button>
         </div>
-      </div>
+      </nav>
 
       <!-- Mobile Menu Button -->
-      <div class="lg:hidden">
+      <div class="lg:hidden flex items-center gap-2">
+        <button
+          type="button"
+          (click)="toggleTheme()"
+          class="w-10 h-10 rounded-full border flex items-center justify-center transition-all"
+          [ngClass]="
+            isScrolled || isMobileMenuOpen
+              ? 'bg-white border-gray-300 text-gray-700'
+              : 'bg-white/10 border-white/30 text-white'
+          "
+          aria-label="Alternar tema"
+        >
+          <svg
+            *ngIf="theme === 'light'"
+            xmlns="http://www.w3.org/2000/svg"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M12 3a6 6 0 1 0 9 9 9 9 0 1 1-9-9z" />
+          </svg>
+          <svg
+            *ngIf="theme === 'dark'"
+            xmlns="http://www.w3.org/2000/svg"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="12" cy="12" r="4" />
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
+          </svg>
+        </button>
         <button
           (click)="toggleMobileMenu()"
           class="p-2 focus:outline-none transition-colors"
@@ -80,7 +160,7 @@
               ? 'text-gray-900 hover:text-red-500'
               : 'text-white hover:text-red-400'
           "
-          aria-label="Menu Principal"
+          aria-label="Menu Principal" [attr.aria-expanded]="isMobileMenuOpen"
         >
           <svg
             *ngIf="!isMobileMenuOpen"
@@ -127,20 +207,20 @@
     [class.opacity-100]="isMobileMenuOpen"
   >
     <div class="px-4 pt-6 pb-8">
-      <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Navegação</p>
+      <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Navegacao</p>
 
-      <!-- Grid de Navegação -->
+      <!-- Grid de Navegacao -->
       <div class="grid grid-cols-2 gap-3">
         <a
           *ngFor="let item of menuItems"
-          href="#"
+          [attr.href]="'#' + item.id"
           (click)="scrollToSection($event, item.id)"
           class="flex flex-col items-center justify-center aspect-[4/3] bg-gray-50 hover:bg-red-50 rounded-2xl border border-gray-100 hover:border-red-100 transition-all group active:scale-95"
         >
           <div
             class="w-10 h-10 mb-2 rounded-full bg-white flex items-center justify-center shadow-sm text-gray-400 group-hover:text-red-500 group-hover:scale-110 transition-all"
           >
-            <!-- Renderização dinâmica de ícones simples -->
+            <!-- RenderizaÃ§Ã£o dinÃ¢mica de Ã­cones simples -->
             <ng-container [ngSwitch]="item.icon">
               <svg
                 *ngSwitchCase="'home'"
@@ -215,7 +295,7 @@
         </a>
       </div>
 
-      <!-- Botão CTA Mobile -->
+      <!-- BotÃ£o CTA Mobile -->
       <a
         href="#test-drive"
         (click)="scrollToSection($event, 'test-drive')"
@@ -241,3 +321,7 @@
     </div>
   </div>
 </header>
+
+
+
+
