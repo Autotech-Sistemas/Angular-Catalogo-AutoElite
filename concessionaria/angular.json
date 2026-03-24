@@ -19,8 +19,8 @@
             "outputPath": "dist",
             "index": "src/index.html",
             "browser": "src/main.ts",
-            "baseHref": "/concessionaria/",
-            "deployUrl": "/concessionaria/",
+            "baseHref": "/",
+            "deployUrl": "/",
             "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.app.json",
             "assets": [
