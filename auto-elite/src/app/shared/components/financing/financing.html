@@ -1,0 +1,65 @@
+﻿<section id="financing" class="financing-section" aria-label="Financiamento">
+  <div class="financing-container">
+    <header class="financing-header" data-aos="fade-up">
+      <h2>
+        Excelencia e inovacao em
+        <br />
+        <span>financiamento</span> e servicos automotivos
+      </h2>
+      <p>
+        Na AutoCatalogo, focamos em um processo simples, transparente e rapido para voce sair com o
+        carro aprovado sem burocracia.
+      </p>
+
+      <nav class="financing-tabs" aria-label="Abas de conteudo">
+        <button
+          *ngFor="let tab of tabs"
+          type="button"
+          class="tab-btn"
+          [class.is-active]="activeTab === tab.id"
+          (click)="setTab(tab.id)"
+        >
+          {{ tab.label }}
+        </button>
+      </nav>
+    </header>
+
+    <div class="financing-content" data-aos="fade-up" data-aos-delay="100">
+      <article class="content-copy">
+        <h3>
+          {{ currentContent.heading }}
+          <span>{{ currentContent.highlight }}</span>
+        </h3>
+
+        <p>{{ currentContent.description }}</p>
+
+        <ul>
+          <li *ngFor="let point of currentContent.points">
+            <svg class="check-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="12" r="10"></circle>
+              <path d="m8 12 2.5 2.5L16 9"></path>
+            </svg>
+            <span>{{ point }}</span>
+          </li>
+        </ul>
+
+        <a href="#loan-sim" (click)="scrollToSection($event, 'loan-sim')" class="financing-cta">
+          Simular Financiamento
+          <svg class="cta-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M5 12h14"></path>
+            <path d="m12 5 7 7-7 7"></path>
+          </svg>
+        </a>
+      </article>
+
+      <aside class="content-gallery" aria-label="Galeria da AutoCatalogo">
+        <figure class="gallery-main">
+          <img src="loja/showroom.jpg" alt="Interior de veiculo premium" loading="lazy" decoding="async" />
+        </figure>
+        <figure class="gallery-side">
+          <img src="loja/atendimento.jpeg" alt="Atendimento na concessionaria" loading="lazy" decoding="async" />
+        </figure>
+      </aside>
+    </div>
+  </div>
+</section>
