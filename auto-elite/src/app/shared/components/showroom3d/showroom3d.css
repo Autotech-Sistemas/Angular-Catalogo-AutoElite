@@ -30,251 +30,147 @@
   padding: 0.45rem 0.9rem;
 }
 
-.stock-carousel {
-  display: grid;
-  grid-template-columns: auto 1fr auto;
+.stock-carousel-container {
+  display: flex;
   align-items: center;
-  gap: 0.6rem;
+  gap: 1rem;
+  position: relative;
 }
 
-.carousel-nav {
-  width: 2.3rem;
-  height: 2.3rem;
-  border-radius: 999px;
+/* AJUSTE PAGINAÇÃO: Padding-bottom evita que os pontos fiquem em cima dos cards */
+.stock-swiper {
+  width: 100%;
+  padding-bottom: 50px;
+  --swiper-pagination-bottom: 0px;
+  --swiper-pagination-bullet-inactive-color: #d1d5db;
+  --swiper-pagination-bullet-inactive-opacity: 1;
+  --swiper-pagination-color: var(--theme-accent);
+}
+
+.stock-swiper::part(bullet-active) {
+  width: 20px;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+.nav-btn {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
   border: 1px solid var(--theme-border);
   background: var(--theme-surface);
   color: var(--theme-text);
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
 }
 
-.carousel-nav svg {
-  width: 1rem;
-  height: 1rem;
-  fill: none;
+.nav-btn:hover {
+  background: var(--theme-accent);
+  color: #fff;
+}
+
+.nav-btn svg {
+  width: 1.2rem;
   stroke: currentColor;
-  stroke-width: 2.2;
-}
-
-.stock-track {
-  display: grid;
-  grid-auto-flow: column;
-  grid-auto-columns: minmax(285px, 320px);
-  gap: 1rem;
-  overflow-x: auto;
-  overflow-y: hidden;
-  scroll-snap-type: x mandatory;
-  padding: 0.2rem;
+  stroke-width: 2.5;
+  fill: none;
 }
 
 .vehicle-card {
-  scroll-snap-align: start;
   border: 1px solid var(--theme-border);
-  border-radius: 12px;
+  border-radius: 16px;
   overflow: hidden;
   background: var(--theme-surface);
-  box-shadow: 0 12px 24px -20px rgba(17, 24, 39, 0.45);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  transition: transform 0.3s ease;
 }
 
-.card-hero {
+/* IMAGEM NO TOPO SEM PADDING */
+.card-media-wrapper {
   position: relative;
-  padding: 0.7rem 0.7rem 0.55rem;
-}
-
-.card-meta {
-  color: rgba(255, 255, 255, 0.82);
-  font-size: 0.72rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-}
-
-.card-trim {
-  margin-top: 0.1rem;
-  color: #ffffff;
-  font-size: 2.05rem;
-  line-height: 1;
-  letter-spacing: 0.02em;
-  font-weight: 900;
-  text-transform: uppercase;
+  width: 100%;
+  height: 200px;
 }
 
 .card-media {
-  margin-top: 0.55rem;
-  height: 180px;
-  position: relative;
-  display: grid;
-  align-items: end;
-  overflow: hidden;
-  border-radius: 6px;
-}
-
-.vehicle-image,
-.vehicle-model {
   width: 100%;
   height: 100%;
-  display: block;
 }
 
 .vehicle-image {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
+  display: block;
 }
 
-.vehicle-model {
-  --poster-color: transparent;
-  background: transparent;
-  min-height: 0 !important;
-}
-
-.card-media model-viewer {
-  width: 100% !important;
-  height: 100% !important;
-  min-height: 0 !important;
-}
-
-.mode-btn {
-  position: absolute;
-  right: 0.45rem;
-  top: 0.45rem;
-  border: none;
-  border-radius: 999px;
-  background: var(--theme-surface);
-  color: var(--theme-text);
-  font-size: 0.72rem;
-  font-weight: 700;
-  padding: 0.3rem 0.6rem;
-  cursor: pointer;
-}
-
-.mode-btn.secondary {
-  background: var(--theme-text);
-  color: var(--theme-surface);
-}
-
+/* INFO EMBAIXO */
 .card-body {
-  padding: 0.75rem 0.8rem 0.85rem;
-  background: var(--theme-surface);
+  padding: 1.25rem;
+  flex-grow: 1;
+}
+
+.card-brand {
+  color: var(--theme-muted);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.card-model-name {
   color: var(--theme-text);
+  font-size: 1.7rem;
+  font-weight: 900;
+  margin: 0.1rem 0;
 }
 
-.price-row,
-.spec-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 0.8rem;
-  border-bottom: 1px solid var(--theme-border);
-  padding: 0.56rem 0;
+.card-version-year {
+  color: var(--theme-muted);
+  font-size: 0.85rem;
 }
 
-.price-row strong,
-.spec-value strong {
+.price-section {
+  border-top: 1px solid var(--theme-border);
+  padding-top: 1rem;
+  margin-top: 1rem;
+}
+
+.price-value {
+  display: block;
+  color: var(--theme-accent);
   font-size: 1.9rem;
-  line-height: 1;
-  font-weight: 800;
+  font-weight: 900;
   letter-spacing: -0.02em;
 }
 
 .label {
+  color: var(--theme-muted);
+  font-size: 0.6rem;
+  font-weight: 800;
   display: block;
-  color: var(--theme-muted);
-  font-size: 0.66rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-}
-
-.spec-row small,
-.spec-value small {
-  color: var(--theme-muted);
-  font-size: 0.68rem;
-}
-
-.spec-value {
-  text-align: right;
-}
-
-.spec-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0.8rem;
-  border-bottom: 1px solid var(--theme-border);
-  padding: 0.56rem 0;
-}
-
-.spec-grid p {
-  margin-top: 0.25rem;
-  color: var(--theme-text);
-  font-size: 0.85rem;
-  line-height: 1.25;
-  white-space: pre-line;
-  font-weight: 600;
-}
-
-.features-link {
-  margin-top: 0.5rem;
-  display: inline-flex;
-  color: var(--theme-muted);
-  font-size: 0.75rem;
-  text-decoration: underline;
 }
 
 .card-cta {
-  margin-top: 0.65rem;
   width: 100%;
-  height: 2.55rem;
+  margin-top: 1rem;
+  padding: 0.85rem;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
   background: var(--theme-accent);
-  color: #ffffff;
-  font-size: 0.95rem;
+  color: #fff;
   font-weight: 800;
   text-transform: uppercase;
   cursor: pointer;
 }
 
-.legal {
-  display: block;
-  margin-top: 0.45rem;
-  text-align: center;
-  color: var(--theme-muted);
-  font-size: 0.68rem;
-}
-
-.carousel-dots {
-  margin-top: 0.9rem;
-  display: flex;
-  justify-content: center;
-  gap: 0.45rem;
-}
-
-.carousel-dots button {
-  width: 0.42rem;
-  height: 0.42rem;
-  border: none;
-  border-radius: 999px;
-  background: #d1d5db;
-  cursor: pointer;
-}
-
-.carousel-dots button.active {
-  width: 0.55rem;
-  height: 0.55rem;
-  background: var(--theme-accent);
-}
-
 @media (max-width: 768px) {
-  .stock-carousel {
-    grid-template-columns: 1fr;
-  }
-
-  .carousel-nav {
-    display: none;
-  }
-
-  .stock-track {
-    grid-auto-columns: minmax(270px, 86vw);
-  }
+  .nav-btn { display: none; }
+  .card-model-name { font-size: 1.5rem; }
+  .price-value { font-size: 1.7rem; }
 }

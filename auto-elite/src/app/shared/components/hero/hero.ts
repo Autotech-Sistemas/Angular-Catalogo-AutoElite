@@ -1,38 +1,52 @@
 import { CommonModule } from '@angular/common';
 import {
+  LucideAngularModule,
+  ArrowRight,
+  ShieldCheck,
+  CheckCircle,
+  ChevronDown,
+} from 'lucide-angular';
+import {
   AfterViewInit,
   ChangeDetectorRef,
   Component,
   CUSTOM_ELEMENTS_SCHEMA,
   OnDestroy,
+  OnInit,
 } from '@angular/core';
-
-declare var lucide: any;
 
 @Component({
   selector: 'app-hero',
-  imports: [CommonModule],
+  imports: [CommonModule, LucideAngularModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: './hero.html',
   styleUrl: './hero.css',
 })
-export class Hero implements AfterViewInit, OnDestroy {
+export class Hero implements AfterViewInit, OnDestroy, OnInit {
   carModels = ['3d/GolfGTIMk7.glb', '3d/RAM.glb', '3d/ToyotaCorolla.glb'];
 
+  isMobile = false;
   currentCarIndex = 0;
   currentModelSrc = this.carModels[0];
   isTransitioning = false;
   private carouselInterval: any;
 
+  readonly icons = {
+    ArrowRight,
+    ShieldCheck,
+    CheckCircle,
+    ChevronDown,
+  };
+
   constructor(private cdr: ChangeDetectorRef) {}
+
+  ngOnInit() {
+	this.isMobile = window.innerWidth < 768;
+    this.carModels.slice(1).forEach(src => fetch(src));
+  }
 
   ngAfterViewInit() {
     if (typeof window !== 'undefined') {
-      setTimeout(() => {
-        if (typeof lucide !== 'undefined') {
-          lucide.createIcons();
-        }
-      }, 100);
       this.startCarousel();
     }
   }

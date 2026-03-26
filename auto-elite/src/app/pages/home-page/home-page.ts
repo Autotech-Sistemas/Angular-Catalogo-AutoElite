@@ -46,21 +46,6 @@ export class HomePage implements OnInit, AfterViewInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.title.setTitle('AutoCatalogo | Concessionaria com Estoque 3D e Financiamento');
-    this.meta.updateTag({
-      name: 'description',
-      content:
-        'AutoCatalogo: estoque com visualizacao 3D, simulador de financiamento, depoimentos e atendimento especializado para compra, troca e venda.',
-    });
-    this.meta.updateTag({
-      property: 'og:title',
-      content: 'AutoCatalogo | Estoque 3D e Financiamento Automotivo',
-    });
-    this.meta.updateTag({
-      property: 'og:description',
-      content:
-        'Veja veiculos em 3D, simule financiamento e fale com especialistas para fechar seu proximo carro.',
-    });
   }
 
   ngAfterViewInit() {
