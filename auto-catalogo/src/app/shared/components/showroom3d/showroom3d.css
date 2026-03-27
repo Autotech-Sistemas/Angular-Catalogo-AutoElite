@@ -1,0 +1,176 @@
+﻿.stock-section {
+  background: var(--theme-bg);
+}
+
+.stock-wrap {
+  width: min(1500px, 97%);
+  margin: 0 auto;
+}
+
+.stock-section h2 {
+  color: var(--theme-text);
+}
+
+.stock-section p {
+  color: var(--theme-muted);
+}
+
+.stock-kicker {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--theme-surface);
+  color: var(--theme-accent);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.72rem;
+  border-radius: 999px;
+  border: 1px solid var(--theme-border);
+  padding: 0.45rem 0.9rem;
+}
+
+.stock-carousel-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  position: relative;
+}
+
+/* AJUSTE PAGINAÇÃO: Padding-bottom evita que os pontos fiquem em cima dos cards */
+.stock-swiper {
+  width: 100%;
+  padding-bottom: 50px;
+  --swiper-pagination-bottom: 0px;
+  --swiper-pagination-bullet-inactive-color: #d1d5db;
+  --swiper-pagination-bullet-inactive-opacity: 1;
+  --swiper-pagination-color: var(--theme-accent);
+}
+
+.stock-swiper::part(bullet-active) {
+  width: 20px;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+.nav-btn {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  border: 1px solid var(--theme-border);
+  background: var(--theme-surface);
+  color: var(--theme-text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+}
+
+.nav-btn:hover {
+  background: var(--theme-accent);
+  color: #fff;
+}
+
+.nav-btn svg {
+  width: 1.2rem;
+  stroke: currentColor;
+  stroke-width: 2.5;
+  fill: none;
+}
+
+.vehicle-card {
+  border: 1px solid var(--theme-border);
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--theme-surface);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  transition: transform 0.3s ease;
+}
+
+/* IMAGEM NO TOPO SEM PADDING */
+.card-media-wrapper {
+  position: relative;
+  width: 100%;
+  height: 200px;
+}
+
+.card-media {
+  width: 100%;
+  height: 100%;
+}
+
+.vehicle-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* INFO EMBAIXO */
+.card-body {
+  padding: 1.25rem;
+  flex-grow: 1;
+}
+
+.card-brand {
+  color: var(--theme-muted);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.card-model-name {
+  color: var(--theme-text);
+  font-size: 1.7rem;
+  font-weight: 900;
+  margin: 0.1rem 0;
+}
+
+.card-version-year {
+  color: var(--theme-muted);
+  font-size: 0.85rem;
+}
+
+.price-section {
+  border-top: 1px solid var(--theme-border);
+  padding-top: 1rem;
+  margin-top: 1rem;
+}
+
+.price-value {
+  display: block;
+  color: var(--theme-accent);
+  font-size: 1.9rem;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+}
+
+.label {
+  color: var(--theme-muted);
+  font-size: 0.6rem;
+  font-weight: 800;
+  display: block;
+}
+
+.card-cta {
+  width: 100%;
+  margin-top: 1rem;
+  padding: 0.85rem;
+  border: none;
+  border-radius: 8px;
+  background: var(--theme-accent);
+  color: #fff;
+  font-weight: 800;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .nav-btn { display: none; }
+  .card-model-name { font-size: 1.5rem; }
+  .price-value { font-size: 1.7rem; }
+}

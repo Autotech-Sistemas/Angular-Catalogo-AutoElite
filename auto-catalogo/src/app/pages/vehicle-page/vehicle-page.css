@@ -1,0 +1,150 @@
+.custom-scrollbar::-webkit-scrollbar {
+  height: 4px;
+  width: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 4px;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+@keyframes scaleUp {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+.animate-scale-up {
+  animation: scaleUp 0.3s ease-out forwards;
+}
+
+/* ── Hero Stats section ───────────────────────────────────────────────────── */
+.hero-stats-watermark {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  pointer-events: none;
+  user-select: none;
+}
+.hero-stats-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  background: rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+.hero-stats-bar > * + * {
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* ── Sobre o Veículo section ──────────────────────────────────────────────── */
+.about-circle-lg {
+  position: absolute;
+  width: 320px;
+  height: 320px;
+  border-radius: 9999px;
+  background: #f3f4f6;
+  right: -64px;
+  bottom: -64px;
+}
+.about-circle-sm {
+  position: absolute;
+  width: 160px;
+  height: 160px;
+  border-radius: 9999px;
+  background: #fef2f2;
+  left: -32px;
+  top: -32px;
+  opacity: 0.6;
+}
+
+/* ── Seção 3 — tabs ───────────────────────────────────────────────────────── */
+.tab-btn {
+  padding: 10px 20px;
+  font-size: 0.75rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border-bottom: 2px solid transparent;
+  transition:
+    color 0.2s,
+    border-color 0.2s;
+  outline: none;
+  background: transparent;
+  cursor: pointer;
+}
+.tab-btn.active {
+  border-bottom-color: #dc2626;
+  color: #dc2626;
+}
+.tab-btn:not(.active) {
+  color: #9ca3af;
+}
+.tab-btn:not(.active):hover {
+  color: #374151;
+}
+.highlight-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  background: #f9fafb;
+  border-radius: 16px;
+  transition: background 0.2s;
+}
+.highlight-card:hover {
+  background: #f3f4f6;
+}
+.spec-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #f3f4f6;
+  padding: 16px 0;
+}
+
+/* ── Botões globais ───────────────────────────────────────────────────────── */
+.btn-primary,
+.btn-whatsapp {
+  transition:
+    transform 0.15s ease,
+    background-color 0.2s ease;
+}
+.btn-primary:hover,
+.btn-whatsapp:hover {
+  transform: translateY(-2px);
+}
+.btn-primary:active,
+.btn-whatsapp:active {
+  transform: translateY(0);
+}
+
+/* Efeito de hover nos links do menu desktop */
+header[class*='bg-white'] .logo-header img {
+  filter: brightness(0);
+}
