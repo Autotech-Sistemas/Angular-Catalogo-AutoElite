@@ -6,7 +6,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "concessionaria": {
+    "Angular-Catalogo-AutoCatalogo": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -36,13 +36,13 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "1MB",
-                  "maximumError": "2MB"
+                  "maximumWarning": "5MB",
+                  "maximumError": "4MB"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "6kB",
-                  "maximumError": "12kB"
+                  "maximumWarning": "8kB",
+                  "maximumError": "14kB"
                 }
               ],
               "outputHashing": "all"
@@ -59,10 +59,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "concessionaria:build:production"
+              "buildTarget": "Angular-Catalogo-AutoCatalogo:build:production"
             },
             "development": {
-              "buildTarget": "concessionaria:build:development"
+              "buildTarget": "Angular-Catalogo-AutoCatalogo:build:development"
             }
           },
           "defaultConfiguration": "development"
