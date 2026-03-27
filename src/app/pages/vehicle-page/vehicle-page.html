@@ -1,0 +1,590 @@
+<header
+  class="fixed top-0 left-0 w-full z-50 bg-white/95 backdrop-blur-md shadow-sm border-b border-gray-100 py-3"
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-10 sm:h-12">
+      <a
+        href="#highlight"
+        class="flex-shrink-0 flex items-center gap-2 cursor-pointer logo-header"
+        aria-label="AutoCatalogo – Ir para o início da página"
+        title="AutoCatalogo – Início"
+      >
+        <img
+          src="logo.png"
+          alt="AutoCatalogo – Veículos Seminovos"
+          width="120"
+          height="40"
+          loading="eager"
+          fetchpriority="high"
+        />
+      </a>
+
+      <a
+        [routerLink]="'/catalogo'"
+        class="flex items-center gap-2 px-4 py-2 rounded-full text-sm font-bold text-gray-600 hover:text-red-600 hover:bg-red-50 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500"
+      >
+        <lucide-icon [img]="icons.ArrowLeft" class="w-4 h-4 sm:w-5 sm:h-5"></lucide-icon>
+        <span class="hidden sm:inline">Voltar para o catálogo</span>
+        <span class="sm:hidden">Voltar</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<div class="bg-gray-50 min-h-screen font-sans text-gray-900 pt-20 lg:pt-24 overflow-x-hidden">
+  <main class="w-full animate-fade-in max-w-[1920px] mx-auto">
+    <div class="flex flex-col lg:flex-row gap-6 lg:gap-10 px-4 md:px-8 lg:px-12 w-full">
+      <div class="w-full lg:w-[65%]">
+        <div
+          class="relative overflow-hidden aspect-[4/3] md:aspect-[16/10] group p-4 sm:p-[3vw] lg:p-[5vw]"
+        >
+          <img
+            [src]="car.images[currentImageIndex]"
+            class="w-full h-full object-contain transition-transform duration-700 hover:scale-105 cursor-zoom-in"
+            alt="Foto do veículo"
+          />
+          <div
+            class="absolute inset-x-2 md:inset-x-4 top-1/2 -translate-y-1/2 flex justify-between pointer-events-none opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity duration-300"
+          >
+            <button
+              (click)="prevImage()"
+              class="pointer-events-auto w-10 h-10 md:w-12 md:h-12 bg-white/90 hover:bg-white rounded-full flex items-center justify-center text-gray-800 transition-transform hover:scale-110 active:scale-95 shadow"
+            >
+              <lucide-icon [img]="icons.ChevronLeft" class="w-5 h-5 md:w-6 md:h-6"></lucide-icon>
+            </button>
+            <button
+              (click)="nextImage()"
+              class="pointer-events-auto w-10 h-10 md:w-12 md:h-12 bg-white/90 hover:bg-white rounded-full flex items-center justify-center text-gray-800 transition-transform hover:scale-110 active:scale-95 shadow"
+            >
+              <lucide-icon [img]="icons.ChevronRight" class="w-5 h-5 md:w-6 md:h-6"></lucide-icon>
+            </button>
+          </div>
+        </div>
+
+        <div class="flex gap-2 sm:gap-3 mt-4 overflow-x-auto pb-2 custom-scrollbar w-full">
+          <button
+            *ngFor="let img of car.images; let i = index"
+            (click)="selectImage(i)"
+            class="flex-shrink-0 w-20 h-16 sm:w-24 sm:h-20 rounded-xl overflow-hidden border-2 transition-all relative hover:opacity-100"
+            [class.border-red-600]="currentImageIndex === i"
+            [class.border-transparent]="currentImageIndex !== i"
+            [class.opacity-60]="currentImageIndex !== i"
+          >
+            <img [src]="img" class="w-full h-full object-cover" />
+          </button>
+        </div>
+      </div>
+
+      <div class="w-full lg:w-[35%]">
+        <div class="lg:sticky lg:top-24 space-y-6">
+          <div
+            class="bg-white p-5 sm:p-6 md:p-8 rounded-3xl border border-gray-100 relative overflow-hidden"
+          >
+            <div class="relative z-10">
+              <span
+                class="inline-block bg-red-100 text-red-600 text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full mb-3"
+              >
+                Seminovo
+              </span>
+              <h1 class="text-2xl sm:text-3xl font-black text-gray-900 leading-tight mb-1">
+                VOLKSWAGEN Nivus
+              </h1>
+              <p class="text-gray-500 font-medium text-sm sm:text-base">
+                Highline 1.0 TSI Turbo Flex
+              </p>
+              <div class="my-5 sm:my-6 flex items-baseline gap-2">
+                <span class="text-sm text-gray-400 font-bold uppercase">R$</span>
+                <span class="text-4xl sm:text-5xl font-black text-gray-900 tracking-tighter">{{
+                  formatPrice(car.price)
+                }}</span>
+              </div>
+
+              <div class="grid grid-cols-2 gap-2 sm:gap-3 mb-6 sm:mb-8">
+                <div class="flex items-center gap-2 sm:gap-3 p-2 sm:p-3 bg-gray-50 rounded-xl">
+                  <div class="bg-white p-1.5 sm:p-2 rounded-lg text-gray-400 flex-shrink-0">
+                    <lucide-icon
+                      [img]="icons.Calendar"
+                      class="w-3.5 h-3.5 sm:w-4 sm:h-4"
+                    ></lucide-icon>
+                  </div>
+                  <div class="flex flex-col min-w-0">
+                    <span
+                      class="text-[9px] sm:text-[10px] text-gray-400 uppercase font-bold truncate"
+                      >Ano</span
+                    >
+                    <span class="text-xs sm:text-sm font-bold text-gray-800 truncate">2024</span>
+                  </div>
+                </div>
+                <div class="flex items-center gap-2 sm:gap-3 p-2 sm:p-3 bg-gray-50 rounded-xl">
+                  <div class="bg-white p-1.5 sm:p-2 rounded-lg text-gray-400 flex-shrink-0">
+                    <lucide-icon
+                      [img]="icons.Gauge"
+                      class="w-3.5 h-3.5 sm:w-4 sm:h-4"
+                    ></lucide-icon>
+                  </div>
+                  <div class="flex flex-col min-w-0">
+                    <span
+                      class="text-[9px] sm:text-[10px] text-gray-400 uppercase font-bold truncate"
+                      >Km</span
+                    >
+                    <span class="text-xs sm:text-sm font-bold text-gray-800 truncate"
+                      >18.400 km</span
+                    >
+                  </div>
+                </div>
+                <div class="flex items-center gap-2 sm:gap-3 p-2 sm:p-3 bg-gray-50 rounded-xl">
+                  <div class="bg-white p-1.5 sm:p-2 rounded-lg text-gray-400 flex-shrink-0">
+                    <lucide-icon [img]="icons.Fuel" class="w-3.5 h-3.5 sm:w-4 sm:h-4"></lucide-icon>
+                  </div>
+                  <div class="flex flex-col min-w-0">
+                    <span
+                      class="text-[9px] sm:text-[10px] text-gray-400 uppercase font-bold truncate"
+                      >Combust.</span
+                    >
+                    <span class="text-xs sm:text-sm font-bold text-gray-800 truncate">Flex</span>
+                  </div>
+                </div>
+                <div class="flex items-center gap-2 sm:gap-3 p-2 sm:p-3 bg-gray-50 rounded-xl">
+                  <div class="bg-white p-1.5 sm:p-2 rounded-lg text-gray-400 flex-shrink-0">
+                    <lucide-icon
+                      [img]="icons.Settings2"
+                      class="w-3.5 h-3.5 sm:w-4 sm:h-4"
+                    ></lucide-icon>
+                  </div>
+                  <div class="flex flex-col min-w-0">
+                    <span
+                      class="text-[9px] sm:text-[10px] text-gray-400 uppercase font-bold truncate"
+                      >Câmbio</span
+                    >
+                    <span class="text-xs sm:text-sm font-bold text-gray-800 truncate"
+                      >Automático</span
+                    >
+                  </div>
+                </div>
+              </div>
+
+              <div class="space-y-3">
+                <button
+                  class="btn-whatsapp w-full py-3.5 sm:py-4 bg-green-600 hover:bg-green-700 text-white font-bold rounded-xl flex items-center justify-center gap-2 text-sm sm:text-base"
+                >
+                  <lucide-icon
+                    [img]="icons.MessageCircle"
+                    class="w-4 h-4 sm:w-5 sm:h-5"
+                  ></lucide-icon>
+                  Negociar pelo WhatsApp
+                </button>
+                <button
+                  (click)="openInterestModal()"
+                  class="btn-primary w-full py-3.5 sm:py-4 bg-gray-900 hover:bg-gray-800 text-white font-bold rounded-xl text-sm sm:text-base"
+                >
+                  Tenho Interesse
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="bg-white p-4 sm:p-6 rounded-3xl border border-gray-100 flex items-center gap-3 sm:gap-4"
+          >
+            <div
+              class="w-10 h-10 sm:w-12 sm:h-12 bg-red-100 rounded-full flex items-center justify-center text-red-600 flex-shrink-0"
+            >
+              <lucide-icon [img]="icons.MapPin" class="w-5 h-5 sm:w-6 sm:h-6"></lucide-icon>
+            </div>
+            <div class="min-w-0">
+              <p class="text-[10px] sm:text-xs text-gray-400 font-bold uppercase truncate">
+                Veículo disponível em:
+              </p>
+              <p class="font-bold text-gray-900 text-sm sm:text-base truncate">
+                AutoCatalogo Matriz - SP
+              </p>
+              <p class="text-xs sm:text-sm text-gray-500 truncate">Av. Brasil, 1234 - Jardins</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <section
+      class="relative mt-8 sm:mt-16 flex flex-col overflow-hidden w-full"
+      style="
+        background: radial-gradient(ellipse at 65% 40%, #6b1a1a 0%, #3a0a0a 45%, #0f0808 100%);
+        min-height: 320px;
+      "
+    >
+      <div
+        class="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden hero-stats-watermark"
+      >
+        <span
+          class="text-white font-black uppercase leading-none tracking-tighter whitespace-nowrap"
+          style="font-size: clamp(40px, 9vw, 130px); opacity: 0.08"
+        >
+          VOLKSWAGEN NIVUS
+        </span>
+      </div>
+
+      <div
+        class="relative z-10 flex flex-col lg:flex-row items-center justify-between px-4 sm:px-10 lg:px-16 pt-10 pb-8 lg:pb-24 gap-6 sm:gap-8 flex-1"
+      >
+        <div class="w-full lg:w-[40%] text-center lg:text-left">
+          <span
+            class="inline-block bg-white/10 text-white/60 text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full mb-3 sm:mb-4"
+          >
+            Seminovo
+          </span>
+          <h2
+            class="text-white font-black leading-none uppercase"
+            style="font-size: clamp(32px, 5vw, 72px); letter-spacing: -1px"
+          >
+            VOLKSWAGEN<br />NIVUS
+          </h2>
+          <p class="text-white/40 font-medium mt-2 sm:mt-3 text-xs sm:text-sm">
+            Highline 1.0 TSI Turbo Flex
+          </p>
+        </div>
+        <div class="w-full lg:w-[55%] flex justify-center lg:justify-end">
+          <img
+            src="carro-frente.png"
+            alt="VW Nivus Vermelho"
+            class="object-contain w-full max-h-[200px] sm:max-h-[400px] lg:max-h-[1000px]"
+          />
+        </div>
+      </div>
+
+      <div
+        class="relative lg:absolute bottom-0 left-0 right-0 w-full grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 bg-white/5 backdrop-blur-md border-t border-white/10 z-20 mt-auto"
+      >
+        <div
+          class="flex flex-col items-center justify-center py-4 px-2 border-r border-b lg:border-b-0 border-white/10"
+        >
+          <span class="text-white/40 text-[9px] font-bold tracking-widest uppercase mb-1">Ano</span>
+          <span class="text-white font-bold text-base sm:text-lg leading-none">2024</span>
+        </div>
+
+        <div
+          class="flex flex-col items-center justify-center py-4 px-2 sm:border-r border-b lg:border-b-0 border-white/10"
+        >
+          <span class="text-white/40 text-[9px] font-bold tracking-widest uppercase mb-1"
+            >Quilometragem</span
+          >
+          <span class="text-white font-bold text-base sm:text-lg leading-none"
+            >18.400<span class="text-xs sm:text-sm font-normal ml-1">km</span></span
+          >
+        </div>
+
+        <div
+          class="flex flex-col items-center justify-center py-4 px-2 border-r sm:border-r-0 lg:border-r border-b sm:border-b-0 border-white/10"
+        >
+          <span class="text-white/40 text-[9px] font-bold tracking-widest uppercase mb-1"
+            >Câmbio</span
+          >
+          <span class="text-white font-bold text-base sm:text-lg leading-none">Automático</span>
+        </div>
+
+        <div
+          class="flex flex-col items-center justify-center py-4 px-2 sm:border-r border-b sm:border-b-0 lg:border-b-0 border-white/10"
+        >
+          <span class="text-white/40 text-[9px] font-bold tracking-widest uppercase mb-1"
+            >Combustível</span
+          >
+          <span class="text-white font-bold text-base sm:text-lg leading-none">Flex</span>
+        </div>
+
+        <div
+          class="flex flex-col items-center justify-center py-4 px-2 col-span-2 sm:col-span-1 lg:col-span-1 border-b sm:border-b-0 border-white/10"
+        >
+          <span class="text-white/40 text-[9px] font-bold tracking-widest uppercase mb-1"
+            >Preço</span
+          >
+          <span class="text-red-400 font-black text-base sm:text-lg leading-none">{{
+            formatPrice(car.price)
+          }}</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-white border border-gray-100 overflow-hidden relative">
+      <div class="about-circle-lg hidden sm:block"></div>
+      <div class="about-circle-sm hidden sm:block"></div>
+
+      <div class="flex flex-col-reverse lg:flex-row items-stretch relative z-10">
+        <div
+          class="flex-1 p-6 sm:p-10 lg:p-14 flex flex-col justify-center text-center sm:text-left"
+        >
+          <span
+            class="inline-block bg-red-100 text-red-600 text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full mb-3 sm:mb-5 mx-auto sm:mx-0 w-fit"
+          >
+            Sobre o Veículo
+          </span>
+          <h2 class="text-2xl sm:text-3xl lg:text-4xl font-black text-gray-900 leading-tight mb-2">
+            VOLKSWAGEN<br /><span class="text-red-600">Nivus</span>
+          </h2>
+          <p class="text-gray-500 font-medium mb-3 sm:mb-5 text-sm sm:text-base">
+            Highline 1.0 TSI Turbo Flex
+          </p>
+          <p class="text-gray-600 leading-relaxed text-sm mb-6 sm:mb-8 max-w-lg mx-auto sm:mx-0">
+            Excelente oportunidade! Volkswagen Nivus Highline 1.0 TSI Turbo Flex em perfeito estado
+            de conservação, na deslumbrante cor vermelho. Veículo revisado, com garantia de loja e
+            procedência verificada. Entre em contato para mais detalhes.
+          </p>
+
+          <div
+            class="flex flex-wrap justify-center sm:justify-start items-center gap-4 sm:gap-6 mb-6 sm:mb-8 pb-6 sm:pb-8 border-b border-gray-100"
+          >
+            <div>
+              <p class="text-[9px] text-gray-400 font-bold uppercase tracking-widest mb-0.5">
+                Procedência
+              </p>
+              <p class="text-lg sm:text-xl md:text-2xl font-black text-gray-900">Verificada</p>
+            </div>
+            <div class="hidden sm:block w-px h-8 bg-gray-200"></div>
+            <div>
+              <p class="text-[9px] text-gray-400 font-bold uppercase tracking-widest mb-0.5">
+                Garantia
+              </p>
+              <p class="text-lg sm:text-xl md:text-2xl font-black text-gray-900">De Loja</p>
+            </div>
+            <div class="hidden sm:block w-px h-8 bg-gray-200"></div>
+            <div>
+              <p class="text-[9px] text-gray-400 font-bold uppercase tracking-widest mb-0.5">
+                IPVA 2024
+              </p>
+              <p class="text-lg sm:text-xl md:text-2xl font-black text-gray-900">Pago</p>
+            </div>
+          </div>
+
+          <div
+            class="flex flex-col sm:flex-row items-center justify-center sm:justify-start gap-3 w-full"
+          >
+            <button
+              (click)="openInterestModal()"
+              class="w-full sm:w-auto px-6 py-3.5 sm:py-3 bg-gray-900 hover:bg-red-600 text-white font-bold rounded-xl transition-all text-sm hover:-translate-y-0.5"
+            >
+              Tenho Interesse
+            </button>
+            <button
+              class="btn-whatsapp w-full sm:w-auto px-6 py-3.5 sm:py-3 bg-green-600 hover:bg-green-700 text-white font-bold rounded-xl transition-all text-sm flex items-center justify-center gap-2"
+            >
+              <lucide-icon [img]="icons.MessageCircle" class="w-4 h-4"></lucide-icon>
+              WhatsApp
+            </button>
+          </div>
+        </div>
+
+        <div
+          class="w-full lg:w-[50%] flex items-center justify-center p-6 sm:p-10 relative overflow-hidden bg-gray-50 lg:bg-transparent"
+        >
+          <img
+            src="carro-traseira.png"
+            alt="VW Nivus Vermelho — traseira"
+            class="relative z-10 w-full object-contain max-h-[250px] md:max-h-[500px] lg:max-h-[1000px] rounded-3xl mix-blend-multiply"
+          />
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-white border border-gray-100 overflow-hidden">
+      <div
+        class="grid grid-cols-1 lg:grid-cols-[1.5fr_1fr_auto] items-center px-4 sm:px-10 lg:px-14 pt-10 sm:pt-12 pb-6 gap-6 sm:gap-10 border-b border-gray-100 text-center lg:text-left"
+      >
+        <div class="w-full min-w-0">
+          <h2 class="text-2xl sm:text-3xl lg:text-4xl font-black text-gray-900 leading-tight">
+            O futuro do luxo<br /><span class="text-red-600">é elétrico</span>
+          </h2>
+        </div>
+
+        <div class="w-full max-w-sm mx-auto lg:mx-0 min-w-0">
+          <p class="text-gray-500 text-xs sm:text-sm leading-relaxed">
+            Entre no futuro da excelência automotiva. Tecnologia avançada que transforma cada viagem
+            em uma experiência extraordinária.
+          </p>
+        </div>
+
+        <div class="w-full flex justify-center lg:justify-end min-w-0">
+          <button
+            (click)="openInterestModal()"
+            class="btn-primary flex items-center justify-center w-full sm:w-auto gap-2 px-6 sm:px-5 py-3.5 sm:py-3 bg-gray-900 text-white text-sm font-bold rounded-xl hover:bg-red-600 transition-all"
+          >
+            Ver Proposta
+            <lucide-icon [img]="icons.ArrowRight" class="w-4 h-4"></lucide-icon>
+          </button>
+        </div>
+      </div>
+
+      <div
+        class="flex gap-1 px-2 sm:px-10 lg:px-14 pt-4 sm:pt-6 border-b border-gray-100 overflow-x-auto custom-scrollbar"
+      >
+        <button
+          (click)="activeTab = 'highlights'"
+          class="tab-btn whitespace-nowrap px-4 sm:px-5 py-3 sm:py-2.5 flex-1 sm:flex-none text-center"
+          [class.active]="activeTab === 'highlights'"
+        >
+          Destaques
+        </button>
+        <button
+          (click)="activeTab = 'specs'"
+          class="tab-btn whitespace-nowrap px-4 sm:px-5 py-3 sm:py-2.5 flex-1 sm:flex-none text-center"
+          [class.active]="activeTab === 'specs'"
+        >
+          Ficha Técnica
+        </button>
+      </div>
+
+      <div class="px-4 sm:px-10 lg:px-14 py-8 sm:py-10 animate-fade-in">
+        <div *ngIf="activeTab === 'highlights'">
+          <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+            <li *ngFor="let feat of highlights" class="highlight-card">
+              <div
+                class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0"
+              >
+                <lucide-icon [img]="icons.CircleCheck" class="w-4 h-4 text-green-600"></lucide-icon>
+              </div>
+              <span class="text-gray-800 font-semibold text-xs sm:text-sm">{{ feat }}</span>
+            </li>
+          </ul>
+        </div>
+        <div *ngIf="activeTab === 'specs'">
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 lg:gap-x-12">
+            <div *ngFor="let spec of specs" class="spec-row">
+              <span class="text-gray-500 text-xs sm:text-sm">{{ spec.label }}</span>
+              <span
+                class="font-bold text-gray-900 text-xs sm:text-sm text-right break-words max-w-[50%]"
+                >{{ spec.value }}</span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div
+    *ngIf="isInterestModalOpen"
+    class="fixed inset-0 z-[100] flex items-end md:items-center justify-center p-0 md:p-6 animate-fade-in"
+  >
+    <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" (click)="closeInterestModal()"></div>
+    <div
+      class="relative bg-white rounded-t-3xl md:rounded-3xl shadow-2xl w-full max-w-4xl overflow-hidden flex flex-col md:flex-row h-[90vh] md:h-auto max-h-[90vh] md:max-h-[600px] animate-scale-up mt-auto md:mt-0"
+    >
+      <button
+        (click)="closeInterestModal()"
+        class="absolute top-4 right-4 z-[110] bg-white/90 hover:bg-white p-2 rounded-full text-gray-800 transition-all shadow-sm"
+      >
+        <lucide-icon [img]="icons.X" class="w-4 h-4 sm:w-5 sm:h-5"></lucide-icon>
+      </button>
+
+      <div
+        class="w-full md:w-2/5 bg-gray-50 p-6 sm:p-8 flex flex-col justify-center border-b md:border-b-0 md:border-r border-gray-100 relative overflow-hidden flex-shrink-0"
+      >
+        <div class="absolute top-0 left-0 w-full md:w-2 md:h-full bg-red-600 h-1"></div>
+
+        <img
+          src="carro-frente.png"
+          class="hidden md:block w-full h-24 sm:h-40 object-contain rounded-xl mb-4 sm:mb-6 transform hover:scale-105 transition-transform duration-500 mix-blend-multiply"
+          alt="VW Nivus"
+        />
+
+        <h3 class="text-xl sm:text-2xl font-black text-gray-900 leading-tight mb-1 text-left">
+          VOLKSWAGEN Nivus
+        </h3>
+        <p class="text-gray-500 text-xs sm:text-sm mb-4 sm:mb-6 font-medium text-left">
+          Highline 1.0 TSI Turbo Flex
+        </p>
+
+        <div
+          class="flex flex-col gap-2 mt-auto bg-white p-3 sm:p-4 rounded-xl border border-gray-100"
+        >
+          <div
+            class="flex justify-between items-center text-xs sm:text-sm border-b border-gray-50 pb-2"
+          >
+            <span class="text-gray-400 font-bold uppercase text-[9px] sm:text-[10px]">Ano</span>
+            <span class="font-bold text-gray-900">2024</span>
+          </div>
+          <div
+            class="flex justify-between items-center text-xs sm:text-sm border-b border-gray-50 pb-2"
+          >
+            <span class="text-gray-400 font-bold uppercase text-[9px] sm:text-[10px]">Km</span>
+            <span class="font-bold text-gray-900">18.400 km</span>
+          </div>
+          <div class="flex justify-between items-end pt-1">
+            <span class="text-gray-400 font-bold uppercase text-[9px] sm:text-[10px]">Preço</span>
+            <span class="text-lg sm:text-xl font-black text-red-600">{{
+              formatPrice(car.price)
+            }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="w-full md:w-3/5 p-6 sm:p-8 overflow-y-auto custom-scrollbar flex-1 pb-10 md:pb-8">
+        <h3 class="text-xl sm:text-2xl font-black text-gray-900 mb-1 sm:mb-2 pr-8">
+          Tenho Interesse
+        </h3>
+        <p class="text-gray-500 text-xs sm:text-sm mb-4 sm:mb-6">
+          Preencha os dados abaixo e nossa equipe entrará em contato o mais breve possível.
+        </p>
+        <form
+          [formGroup]="interestForm"
+          (ngSubmit)="onSubmitInterest()"
+          class="space-y-3 sm:space-y-4"
+        >
+          <div>
+            <label class="block text-[10px] sm:text-xs font-bold text-gray-700 uppercase mb-1 ml-1"
+              >Nome Completo</label
+            >
+            <input
+              formControlName="name"
+              type="text"
+              class="w-full bg-gray-50 border border-gray-200 rounded-xl px-3 sm:px-4 py-3 sm:py-3 text-sm focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500 transition-all placeholder-gray-400"
+              placeholder="Ex: João Silva"
+            />
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+            <div>
+              <label
+                class="block text-[10px] sm:text-xs font-bold text-gray-700 uppercase mb-1 ml-1"
+                >Telefone</label
+              >
+              <input
+                formControlName="phone"
+                type="tel"
+                class="w-full bg-gray-50 border border-gray-200 rounded-xl px-3 sm:px-4 py-3 sm:py-3 text-sm focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500 transition-all placeholder-gray-400"
+                placeholder="(00) 00000-0000"
+              />
+            </div>
+            <div>
+              <label
+                class="block text-[10px] sm:text-xs font-bold text-gray-700 uppercase mb-1 ml-1"
+                >Email</label
+              >
+              <input
+                formControlName="email"
+                type="email"
+                class="w-full bg-gray-50 border border-gray-200 rounded-xl px-3 sm:px-4 py-3 sm:py-3 text-sm focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500 transition-all placeholder-gray-400"
+                placeholder="seu@email.com"
+              />
+            </div>
+          </div>
+          <div>
+            <label class="block text-[10px] sm:text-xs font-bold text-gray-700 uppercase mb-1 ml-1"
+              >Mensagem (Opcional)</label
+            >
+            <textarea
+              formControlName="message"
+              rows="2"
+              class="w-full bg-gray-50 border border-gray-200 rounded-xl px-3 sm:px-4 py-3 sm:py-3 text-sm focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500 transition-all resize-none placeholder-gray-400 sm:rows-3"
+            ></textarea>
+          </div>
+          <button
+            type="submit"
+            [disabled]="interestForm.invalid"
+            class="btn-primary w-full bg-gray-900 hover:bg-red-600 text-white font-bold py-3.5 sm:py-4 rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed mt-2 sm:mt-4 text-sm sm:text-base"
+          >
+            Enviar Proposta
+          </button>
+          <p class="text-[9px] sm:text-[10px] text-center text-gray-400 mt-2">
+            Ao enviar, você concorda com nossa política de privacidade.
+          </p>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

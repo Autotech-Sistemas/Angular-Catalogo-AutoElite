@@ -1,0 +1,128 @@
+.location-v2 {
+  background: var(--theme-bg);
+  padding: 1rem 0 0;
+}
+
+.location-v2-wrap {
+  width: 100%;
+  margin: 0;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 1.3rem 0;
+}
+
+.location-v2-top {
+  width: min(1380px, 96%);
+  margin: 0 auto 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.location-v2-top h2 {
+  color: var(--theme-text);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+}
+
+.location-pills {
+  display: inline-flex;
+  gap: 0.55rem;
+  flex-wrap: wrap;
+}
+
+.location-pills button {
+  border: 1px solid var(--theme-border);
+  border-radius: 999px;
+  background: var(--theme-surface);
+  color: var(--theme-text);
+  font-size: 0.86rem;
+  padding: 0.45rem 1rem;
+}
+
+.location-v2-grid {
+  width: min(1380px, 96%);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.location-info {
+  padding: 0.3rem;
+}
+
+.location-info h3 {
+  color: var(--theme-text);
+  font-size: clamp(1.4rem, 2.2vw, 2rem);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  font-weight: 700;
+  max-width: 22ch;
+}
+
+.location-line {
+  margin-top: 1rem;
+  color: var(--theme-muted);
+  font-size: 1rem;
+}
+
+.location-contact-item {
+  margin-top: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: var(--theme-text);
+}
+
+.location-contact-item svg {
+  width: 1rem;
+  height: 1rem;
+  fill: none;
+  stroke: var(--theme-accent);
+  stroke-width: 2;
+  flex: 0 0 auto;
+}
+
+.location-note {
+  margin-top: 1.4rem;
+  color: var(--theme-muted);
+  font-size: 0.87rem;
+  line-height: 1.4;
+  max-width: 36ch;
+}
+
+.location-map {
+  border-radius: 0;
+  overflow: hidden;
+  min-height: 420px;
+}
+
+.location-map iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  filter: saturate(0.9) contrast(0.95);
+}
+
+@media (min-width: 980px) {
+  .location-v2-grid {
+    grid-template-columns: 0.42fr 0.58fr;
+    gap: 1.2rem;
+    align-items: stretch;
+  }
+
+  .location-map {
+    min-height: 520px;
+  }
+}
+
+@media (max-width: 640px) {
+  .location-v2-wrap {
+    padding: 0.9rem 0;
+  }
+}

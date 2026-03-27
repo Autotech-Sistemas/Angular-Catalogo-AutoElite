@@ -1,0 +1,20 @@
+#categories {
+  background: var(--theme-bg);
+}
+
+#categories > div {
+  width: min(1380px, 96%);
+  max-width: none;
+}
+
+#categories h2 {
+  color: var(--theme-text);
+}
+
+#categories p {
+  color: var(--theme-muted);
+}
+
+#categories a {
+  border: 1px solid var(--theme-border);
+}
